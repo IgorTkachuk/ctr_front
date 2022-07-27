@@ -1,12 +1,14 @@
 import { LockOutlined, UserOutlined } from "@ant-design/icons";
-import { Form, Input, Button } from "antd";
-import { useDispatch } from "react-redux";
+import { Form, Input, Button, Alert } from "antd";
+import { useDispatch, useSelector } from "react-redux";
 import { reqAuthThunk } from "../../redux/auth/asyncActions";
+import { selectorAuth } from "../../redux/auth/selector";
 
 import s from "./Auth.module.css";
 
 const Auth = () => {
   const dispatch = useDispatch();
+  const { status: authStatus } = useSelector(selectorAuth);
 
   const onFormFinished = (values) => {
     dispatch(reqAuthThunk(values));
@@ -64,6 +66,9 @@ const Auth = () => {
             Or <a href="#q">register now!</a>
           </div>
         </Form.Item>
+        {authStatus === "ERROR" ? (
+          <Alert message="Autentication error!" type="error" closable />
+        ) : null}
       </Form>
     </div>
   );
