@@ -9,3 +9,15 @@
   width: 350px;
   margin: 0 auto;
 }
+
+.login-form-forgot {
+  float: right;
+}
+
+.login-form-register {
+  float: left;
+}
+
+.login-form-button {
+  width: 100%;
+}

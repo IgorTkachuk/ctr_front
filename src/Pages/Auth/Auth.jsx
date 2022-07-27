@@ -1,15 +1,24 @@
-import { Form, Input } from "antd";
+import { LockOutlined, UserOutlined } from "@ant-design/icons";
+import { Form, Input, Button } from "antd";
+import { useDispatch } from "react-redux";
+import { reqAuthThunk } from "../../redux/auth/asyncActions";
 
 import s from "./Auth.module.css";
 
 const Auth = () => {
+  const dispatch = useDispatch();
+
+  const onFormFinished = (values) => {
+    dispatch(reqAuthThunk(values));
+  };
+
   return (
     <div className={s.container}>
       <Form
         className={s.form}
         labelCol={{ span: 6 }}
         wrapperCol={{ span: 18 }}
-        onFinish={() => console.log("form is finished")}
+        onFinish={onFormFinished}
         onFinishFailed={() => {
           console.log("form finish is failed");
         }}
@@ -24,7 +33,7 @@ const Auth = () => {
             },
           ]}
         >
-          <Input />
+          <Input prefix={<UserOutlined />} placeholder="Username" />
         </Form.Item>
         <Form.Item
           label="Password"
@@ -36,7 +45,24 @@ const Auth = () => {
             },
           ]}
         >
-          <Input />
+          <Input.Password prefix={<LockOutlined />} placeholder="Password" />
+        </Form.Item>
+        <Form.Item wrapperCol={{ span: 24 }}>
+          <a className={s["login-form-forgot"]} href="#q">
+            Forgot password
+          </a>
+        </Form.Item>
+        <Form.Item wrapperCol={{ span: 24 }}>
+          <Button
+            type="primary"
+            htmlType="submit"
+            className={s["login-form-button"]}
+          >
+            Log in
+          </Button>
+          <div className={s["login-form-register"]}>
+            Or <a href="#q">register now!</a>
+          </div>
         </Form.Item>
       </Form>
     </div>
