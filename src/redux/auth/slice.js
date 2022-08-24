@@ -1,5 +1,4 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { act } from "react-dom/test-utils";
 import { reqAuthThunk } from "./asyncActions";
 
 const initialState = {
@@ -22,6 +21,12 @@ const authSlice = createSlice({
       state.token = "";
       state.refreshToken = "";
       state.status = "ERROR";
+    },
+    logout: (state) => {
+      state.username = "";
+      state.token = "";
+      state.refreshToken = "";
+      state.status = "";
     },
   },
   extraReducers: (builder) => {
@@ -46,5 +51,6 @@ const authSlice = createSlice({
   },
 });
 
-export const { refreshAuthSuccess, refreshAuthFail } = authSlice.actions;
+export const { refreshAuthSuccess, refreshAuthFail, logout } =
+  authSlice.actions;
 export default authSlice.reducer;

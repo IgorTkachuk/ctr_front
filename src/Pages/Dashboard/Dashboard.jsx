@@ -7,20 +7,23 @@ import {
 } from "@ant-design/icons";
 import { Breadcrumb, Layout, Menu, Button } from "antd";
 import React, { useState } from "react";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 
 import { Outlet } from "react-router-dom";
 import { selectorAuth } from "../../redux/auth/selector";
+import { logout } from "../../redux/auth/slice";
 
 const { Header, Content, Footer, Sider } = Layout;
 
 const Dashboard = () => {
   const navigate = useNavigate();
+  const dispath = useDispatch();
   const { username } = useSelector(selectorAuth);
 
   const handleLogout = () => {
     console.log("Need dispath logout action");
+    dispath(logout());
   };
 
   const getItem = (label, key, icon, children) => {
@@ -31,17 +34,14 @@ const Dashboard = () => {
       label,
       onClick: (params) => {
         if (params.key == 1) {
-          console.log(params.key);
           navigate("/dashboard/vendor", { replace: true });
         }
 
         if (params.key == 2) {
-          console.log(params.key);
           navigate("/dashboard/emploee", { replace: true });
         }
 
         if (params.key != 1 && params.key != 2) {
-          console.log(params.key);
           navigate("/dashboard/other", { replace: true });
         }
       },
