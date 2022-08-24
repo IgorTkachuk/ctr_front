@@ -1,6 +1,6 @@
 import React from "react";
 import { useGetAllVendorsQuery } from "../../redux/vendor/slice";
-import { Button } from "antd";
+import { Button, Spin } from "antd";
 import { useNavigate } from "react-router-dom";
 
 export const Vendor = () => {
@@ -8,7 +8,7 @@ export const Vendor = () => {
   const { data, isLoading } = useGetAllVendorsQuery();
 
   if (isLoading) {
-    return <h2>Loading ...</h2>;
+    return <Spin />;
   }
 
   return (
