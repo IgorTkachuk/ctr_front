@@ -1,18 +1,51 @@
+import { useEffect } from "react";
+
 import { LockOutlined, UserOutlined } from "@ant-design/icons";
-import { Form, Input, Button, Alert } from "antd";
+import { Form, Input, Button, Alert, notification } from "antd";
 import { useDispatch, useSelector } from "react-redux";
 import { reqAuthThunk } from "../../redux/auth/asyncActions";
 import { selectorAuth } from "../../redux/auth/selector";
+import { Link, Navigate, useLocation } from "react-router-dom";
 
 import s from "./Auth.module.css";
+import { selectorSignup } from "../../redux/signup/selectors";
 
 const Auth = () => {
+  const location = useLocation();
+
+  const redirectedFrom = location?.state?.from?.pathname;
+
   const dispatch = useDispatch();
   const { status: authStatus } = useSelector(selectorAuth);
+  const { status: signupStatus } = useSelector(selectorSignup);
 
   const onFormFinished = (values) => {
     dispatch(reqAuthThunk(values));
   };
+
+  useEffect(() => {
+    if (signupStatus === "SUCCESS") {
+      notification.open({
+        message: "Registered!",
+        description: "Registered success! Now you can log in.",
+        duration: 3,
+      });
+    }
+  }, [signupStatus]);
+
+  useEffect(() => {
+    if (redirectedFrom) {
+      notification.open({
+        message: "Warning!",
+        description: "You need authenticate first.",
+        duration: 3,
+      });
+    }
+  }, [redirectedFrom]);
+
+  if (authStatus === "SUCCESS") {
+    return <Navigate to="/dashboard" replace={true} />;
+  }
 
   return (
     <div className={s.container}>
@@ -63,7 +96,7 @@ const Auth = () => {
             Log in
           </Button>
           <div className={s["login-form-register"]}>
-            Or <a href="#q">register now!</a>
+            Or <Link to="/signup">register now!</Link>
           </div>
         </Form.Item>
         {authStatus === "ERROR" ? (

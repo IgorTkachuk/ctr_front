@@ -3,6 +3,7 @@ import ReactDOM from "react-dom/client";
 import { Provider } from "react-redux";
 import App from "./App";
 import { store } from "./redux/store";
+import setupInterceptors from "./services/setupInterceptors";
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
@@ -10,3 +11,5 @@ root.render(
     <App />
   </Provider>
 );
+
+setupInterceptors(store);
