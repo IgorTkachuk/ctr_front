@@ -56,10 +56,38 @@ export const vendorApi = createApi({
             ]
           : [{ type: "Vendor", id: "LIST" }],
     }),
+    getVendorByID: builder.query({
+      query: (id) => ({
+        url: `/api/vendors/${id}`,
+        method: "GET",
+      }),
+      providesTags: (result) =>
+        result
+          ? [
+              { type: "Vendor", id: result?.id },
+              { type: "Vendor", id: "LIST" },
+            ]
+          : [{ type: "Vendor", id: "LIST" }],
+    }),
     createVendor: builder.mutation({
       query: (body) => ({
         url: "/api/vendors",
         method: "POST",
+        body,
+      }),
+      invalidatesTags: [{ type: "Vendor", id: "LIST" }],
+    }),
+    deleteVendor: builder.mutation({
+      query: (vendorId) => ({
+        url: `/api/vendors/${vendorId}`,
+        method: "DELETE",
+      }),
+      invalidatesTags: [{ type: "Vendor", id: "LIST" }],
+    }),
+    updateVendor: builder.mutation({
+      query: (body) => ({
+        url: "/api/vendors",
+        method: "PATCH",
         body,
       }),
       invalidatesTags: [{ type: "Vendor", id: "LIST" }],
@@ -69,4 +97,10 @@ export const vendorApi = createApi({
 
 // Export hooks for usage in functional components, which are
 // auto-generated based on the defined endpoints
-export const { useGetAllVendorsQuery, useCreateVendorMutation } = vendorApi;
+export const {
+  useGetAllVendorsQuery,
+  useCreateVendorMutation,
+  useDeleteVendorMutation,
+  useUpdateVendorMutation,
+  useGetVendorByIDQuery,
+} = vendorApi;
