@@ -4,7 +4,7 @@ import { Auth } from "./Pages/Auth";
 import { Signup } from "./Pages/Signup";
 import Dashboard from "./Pages/Dashboard/Dashboard";
 import { RequireAuth } from "./hoc/RequireAuth";
-import { Vendor, NewVendor } from "./Pages/Vendor";
+import { Vendor, NewVendor, EditVendor } from "./Pages/Vendor";
 
 function App() {
   return (
@@ -23,6 +23,7 @@ function App() {
           >
             <Route path="vendor" element={<Vendor />} />
             <Route path="vendor/new" element={<NewVendor />} />
+            <Route path="vendor/edit/:id" element={<EditVendor />} />
             <Route path="emploee" element={<h1>Emploee</h1>} />
             <Route path="other" element={<h1>Other</h1>} />
           </Route>
