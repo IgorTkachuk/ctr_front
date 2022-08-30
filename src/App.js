@@ -5,6 +5,9 @@ import { Signup } from "./Pages/Signup";
 import Dashboard from "./Pages/Dashboard/Dashboard";
 import { RequireAuth } from "./hoc/RequireAuth";
 import { Vendor, NewVendor, EditVendor } from "./Pages/Vendor";
+import PrnModel from "./Pages/PrnModel/PrnModel";
+import NewPrnModel from "./Pages/PrnModel/NewPrnModel";
+import EditPrnModel from "./Pages/PrnModel/EditPrnModel";
 
 function App() {
   return (
@@ -24,6 +27,9 @@ function App() {
             <Route path="vendor" element={<Vendor />} />
             <Route path="vendor/new" element={<NewVendor />} />
             <Route path="vendor/edit/:id" element={<EditVendor />} />
+            <Route path="printer" element={<PrnModel />} />
+            <Route path="printer/new" element={<NewPrnModel />} />
+            <Route path="printer/edit/:id" element={<EditPrnModel />} />
             <Route path="emploee" element={<h1>Emploee</h1>} />
             <Route path="other" element={<h1>Other</h1>} />
           </Route>

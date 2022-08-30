@@ -1,7 +1,8 @@
 import { configureStore, combineReducers } from "@reduxjs/toolkit";
 import auth from "./auth/slice";
 import signup from "./signup/slice";
-import { vendorApi } from "./vendor/slice";
+import { vendorApi } from "./vendor/vendorApi";
+import { prnApi } from "./printerModel/printerModelApi";
 
 import {
   persistReducer,
@@ -25,6 +26,7 @@ const rootReducer = combineReducers({
   auth,
   signup,
   [vendorApi.reducerPath]: vendorApi.reducer,
+  [prnApi.reducerPath]: prnApi.reducer,
 });
 
 const persistedReducer = persistReducer(persistConfig, rootReducer);
@@ -36,7 +38,9 @@ const store = configureStore({
       serializableCheck: {
         ignoredActions: [FLUSH, REHYDRATE, PAUSE, PERSIST, PURGE, REGISTER],
       },
-    }).concat(vendorApi.middleware),
+    })
+      .concat(vendorApi.middleware)
+      .concat(prnApi.middleware),
 });
 
 export const persistor = persistStore(store);

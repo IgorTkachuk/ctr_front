@@ -2,7 +2,7 @@ import React from "react";
 import {
   useDeleteVendorMutation,
   useGetAllVendorsQuery,
-} from "../../redux/vendor/slice";
+} from "../../redux/vendor/vendorApi";
 import { Button, Spin, Row, Col, Image, Table, Space } from "antd";
 import { useNavigate } from "react-router-dom";
 
