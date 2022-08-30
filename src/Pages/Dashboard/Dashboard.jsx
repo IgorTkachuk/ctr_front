@@ -38,7 +38,7 @@ const Dashboard = () => {
         }
 
         if (params.key == 2) {
-          navigate("/dashboard/emploee", { replace: true });
+          navigate("/dashboard/printer", { replace: true });
         }
 
         if (params.key != 1 && params.key != 2) {

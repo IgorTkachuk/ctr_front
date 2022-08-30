@@ -3,7 +3,7 @@ import { Form, Input, Button, Spin } from "antd";
 import {
   useGetVendorByIDQuery,
   useUpdateVendorMutation,
-} from "../../redux/vendor/slice";
+} from "../../redux/vendor/vendorApi";
 import { useNavigate, useParams } from "react-router-dom";
 
 export const EditVendor = () => {

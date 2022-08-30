@@ -1,6 +1,6 @@
 import React from "react";
 import { Form, Input, Button } from "antd";
-import { useCreateVendorMutation } from "../../redux/vendor/slice";
+import { useCreateVendorMutation } from "../../redux/vendor/vendorApi";
 import { useNavigate } from "react-router-dom";
 
 export const NewVendor = () => {
