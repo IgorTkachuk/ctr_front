@@ -3,6 +3,7 @@ import auth from "./auth/slice";
 import signup from "./signup/slice";
 import { vendorApi } from "./vendor/vendorApi";
 import { prnApi } from "./printerModel/printerModelApi";
+import { cartridgeModelApi } from "./cartridgeModel/cartridgeModelApi";
 
 import {
   persistReducer,
@@ -27,6 +28,7 @@ const rootReducer = combineReducers({
   signup,
   [vendorApi.reducerPath]: vendorApi.reducer,
   [prnApi.reducerPath]: prnApi.reducer,
+  [cartridgeModelApi.reducerPath]: cartridgeModelApi.reducer,
 });
 
 const persistedReducer = persistReducer(persistConfig, rootReducer);
@@ -38,9 +40,11 @@ const store = configureStore({
       serializableCheck: {
         ignoredActions: [FLUSH, REHYDRATE, PAUSE, PERSIST, PURGE, REGISTER],
       },
-    })
-      .concat(vendorApi.middleware)
-      .concat(prnApi.middleware),
+    }).concat(
+      vendorApi.middleware,
+      prnApi.middleware,
+      cartridgeModelApi.middleware
+    ),
 });
 
 export const persistor = persistStore(store);

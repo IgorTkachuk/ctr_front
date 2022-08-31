@@ -42,7 +42,7 @@ const Dashboard = () => {
         }
 
         if (params.key != 1 && params.key != 2) {
-          navigate("/dashboard/other", { replace: true });
+          navigate("/dashboard/ctrmodel", { replace: true });
         }
       },
     };

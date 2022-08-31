@@ -8,6 +8,9 @@ import { Vendor, NewVendor, EditVendor } from "./Pages/Vendor";
 import PrnModel from "./Pages/PrnModel/PrnModel";
 import NewPrnModel from "./Pages/PrnModel/NewPrnModel";
 import EditPrnModel from "./Pages/PrnModel/EditPrnModel";
+import CtrModel from "./Pages/CtrModel/CtrModel";
+import NewCtrModel from "./Pages/CtrModel/NewCtrModel";
+import EditCtrModel from "./Pages/CtrModel/EditCtrModel";
 
 function App() {
   return (
@@ -30,6 +33,9 @@ function App() {
             <Route path="printer" element={<PrnModel />} />
             <Route path="printer/new" element={<NewPrnModel />} />
             <Route path="printer/edit/:id" element={<EditPrnModel />} />
+            <Route path="ctrmodel" element={<CtrModel />} />
+            <Route path="ctrmodel/new" element={<NewCtrModel />} />
+            <Route path="ctrmodel/edit/:id" element={<EditCtrModel />} />
             <Route path="emploee" element={<h1>Emploee</h1>} />
             <Route path="other" element={<h1>Other</h1>} />
           </Route>
