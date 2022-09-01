@@ -1,9 +1,10 @@
 import React from "react";
-import { Table, Spin, Button, Space, Image } from "antd";
+import { Table, Spin, Button, Space, Image, List } from "antd";
 import {
   useDeleteCartridgeModelMutation,
   useGetAllCartridgeModelsQuery,
 } from "../../redux/cartridgeModel/cartridgeModelApi";
+import { useGetAllPrinterModelsQuery } from "../../redux/printerModel/printerModelApi";
 import { useGetAllVendorsQuery } from "../../redux/vendor/vendorApi";
 import { useNavigate } from "react-router-dom";
 
@@ -14,8 +15,12 @@ function CtrModel() {
 
   const { data: ctrModelData, isLoading: ctrModelIsLoading } =
     useGetAllCartridgeModelsQuery();
+
   const { data: vendorData, isLoading: vendorDataIsLoading } =
     useGetAllVendorsQuery();
+
+  const { data: prnModelData, isLoading: isPrnModelDataLoading } =
+    useGetAllPrinterModelsQuery();
 
   const handleNewCtrModel = () => {
     navigate("/dashboard/ctrmodel/new");
@@ -28,7 +33,7 @@ function CtrModel() {
     navigate(`/dashboard/ctrmodel/edit/${id}`);
   };
 
-  if (ctrModelIsLoading || vendorDataIsLoading) {
+  if (ctrModelIsLoading || vendorDataIsLoading || isPrnModelDataLoading) {
     return <Spin />;
   }
 
@@ -49,11 +54,24 @@ function CtrModel() {
       dataIndex: "name",
       key: "name",
     },
-    // {
-    //   title: "Vendor ID",
-    //   dataIndex: "vendor_id",
-    //   key: "vendor_id",
-    // },
+    {
+      title: "Supported printers",
+      dataIndex: "supp_prns",
+      key: "supp_prns",
+      render: (_, record) => {
+        const data = record.supp_prns.map(
+          (prnModel_id) =>
+            prnModelData.find((prnModel) => prnModel.id === prnModel_id)?.name
+        );
+        return (
+          <List
+            size='small'
+            dataSource={data}
+            renderItem={(item) => <List.Item>{item}</List.Item>}
+          />
+        );
+      },
+    },
     {
       title: "Vendor Name",
       dataIndex: "vendor_name",
@@ -64,7 +82,7 @@ function CtrModel() {
       dataIndex: "image_url",
       key: "image_url",
       render: (_, record) => (
-        <Image src={record.image_url} alt="cartridge photo" width={30} />
+        <Image src={record.image_url} alt='cartridge photo' width={30} />
       ),
     },
     {
@@ -73,11 +91,11 @@ function CtrModel() {
       key: "image_url",
       render: (_, record) => (
         <Space>
-          <Button type="primary" onClick={() => handleEditCtrModel(record.id)}>
+          <Button type='primary' onClick={() => handleEditCtrModel(record.id)}>
             Edit
           </Button>
           <Button
-            type="primary"
+            type='primary'
             danger
             onClick={() => handleDeleteCtrModel(record.id)}
           >
@@ -89,8 +107,8 @@ function CtrModel() {
   ];
 
   return (
-    <Space direction="vertical" size="middle" style={{ display: "flex" }}>
-      <Button type="primary" onClick={() => handleNewCtrModel()}>
+    <Space direction='vertical' size='middle' style={{ display: "flex" }}>
+      <Button type='primary' onClick={() => handleNewCtrModel()}>
         Create new cartridge model
       </Button>
       <Table dataSource={dataSource} columns={columns} />

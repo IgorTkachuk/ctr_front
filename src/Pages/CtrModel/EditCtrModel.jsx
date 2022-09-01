@@ -1,6 +1,7 @@
 import React from "react";
 import { Form, Input, Button, Spin, Select } from "antd";
 import { useNavigate, useParams } from "react-router-dom";
+import { useGetAllPrinterModelsQuery } from "../../redux/printerModel/printerModelApi";
 import { useGetAllVendorsQuery } from "../../redux/vendor/vendorApi";
 import {
   useGetCartridgeModelByIDQuery,
@@ -11,6 +12,8 @@ function EditCtrModel() {
   const navigate = useNavigate();
   const { data: vendorData, isLoading: isVendorDataLoading } =
     useGetAllVendorsQuery();
+  const { data: prnModelData, isLoading: isPrnModelDataLoading } =
+    useGetAllPrinterModelsQuery();
   const [updateCtrModel] = useUpdateCartridgeModelMutation();
 
   const params = useParams();
@@ -23,9 +26,14 @@ function EditCtrModel() {
     navigate("/dashboard/ctrmodel");
   };
 
-  if (isVendorDataLoading || isCtrModelDataLoading) {
+  if (isVendorDataLoading || isCtrModelDataLoading || isPrnModelDataLoading) {
     return <Spin />;
   }
+
+  // const prnModelWithVendor = prnModelData.map((prnModel) => ({
+  //   ...prnModel,
+  //   vendor_name: vendorData.find((vendor) => vendor.id === prnModel.vendor_id),
+  // }));
 
   return (
     <Form
@@ -36,12 +44,12 @@ function EditCtrModel() {
         console.log("New cartridgemodel form submit failed");
       }}
     >
-      <Form.Item label="ID" name="id" initialValue={ctrModelData?.id}>
+      <Form.Item label='ID' name='id' initialValue={ctrModelData?.id}>
         <Input defaultValue={ctrModelData?.id} disabled />
       </Form.Item>
       <Form.Item
-        label="Cartridge name:"
-        name="name"
+        label='Cartridge name:'
+        name='name'
         initialValue={ctrModelData?.name}
         rules={[
           {
@@ -50,11 +58,11 @@ function EditCtrModel() {
           },
         ]}
       >
-        <Input placeholder="Cartridge name" />
+        <Input placeholder='Cartridge name' />
       </Form.Item>
       <Form.Item
-        label="Vendor"
-        name="vendor_id"
+        label='Vendor'
+        name='vendor_id'
         initialValue={ctrModelData?.vendor_id}
         rules={[
           {
@@ -72,17 +80,45 @@ function EditCtrModel() {
         </Select>
       </Form.Item>
       <Form.Item
-        label="Image URL"
-        name="image_url"
+        label='Image URL'
+        name='image_url'
         initialValue={ctrModelData?.image_url}
       >
         <Input
-          placeholder="Cartridge image URL"
+          placeholder='Cartridge image URL'
           defaultValue={ctrModelData?.image_url}
         />
       </Form.Item>
+      <Form.Item
+        label='Supported printers'
+        name='supp_prns'
+        initialValue={ctrModelData.supp_prns}
+      >
+        <Select
+          mode='multiple'
+          placeholder='Select supported printers'
+          defaultValue={ctrModelData.supp_prns}
+        >
+          {vendorData.map((vendor) => (
+            <Select.OptGroup label={vendor.name} key={vendor.id}>
+              {prnModelData
+                .filter((model) => model.vendor_id === vendor.id)
+                .map((prnModel) => (
+                  <Select.Option key={prnModel.id} value={prnModel.id}>
+                    {prnModel.name}
+                  </Select.Option>
+                ))}
+            </Select.OptGroup>
+          ))}
+          {/* {prnModelData.map((prnModel) => (
+            <Select.Option key={prnModel.id} value={prnModel.id}>
+              {prnModel.name}
+            </Select.Option>
+          ))} */}
+        </Select>
+      </Form.Item>
       <Form.Item wrapperCol={{ span: 24 }}>
-        <Button type="primary" htmlType="submit">
+        <Button type='primary' htmlType='submit'>
           Apply changes to printer cartridge model
         </Button>
       </Form.Item>
