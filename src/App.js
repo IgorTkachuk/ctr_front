@@ -14,6 +14,9 @@ import EditCtrModel from "./Pages/CtrModel/EditCtrModel";
 import Ou from "./Pages/Ou/Ou";
 import NewOu from "./Pages/Ou/NewOu";
 import EditOu from "./Pages/Ou/EditOu";
+import BusinessLine from "./Pages/BusinessLine/BusinessLine";
+import NewBusinessLine from "./Pages/BusinessLine/NewBusinessLine";
+import EditBusinessLine from "./Pages/BusinessLine/EditBusinessLine";
 
 function App() {
   return (
@@ -42,6 +45,9 @@ function App() {
             <Route path='ou' element={<Ou />} />
             <Route path='ou/new' element={<NewOu />} />
             <Route path='ou/edit/:id' element={<EditOu />} />
+            <Route path='bl' element={<BusinessLine />} />
+            <Route path='bl/new' element={<NewBusinessLine />} />
+            <Route path='bl/edit/:id' element={<EditBusinessLine />} />
             <Route path='emploee' element={<h1>Emploee</h1>} />
             <Route path='other' element={<h1>Other</h1>} />
           </Route>
