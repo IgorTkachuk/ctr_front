@@ -1,10 +1,12 @@
 import React from "react";
 import { Spin, Table, Space, Button } from "antd";
 import { useDeleteOuMutation, useGetAllOuQuery } from "../../redux/ou/ouApi";
+import { useGetAllBLQuery } from "../../redux/businessLine/businessLineApi";
 import { useNavigate } from "react-router-dom";
 
 const Ou = () => {
   const { data, isLoading } = useGetAllOuQuery();
+  const { data: blData, isLoading: isBLDataLoading } = useGetAllBLQuery();
   const [deleteOu] = useDeleteOuMutation();
   const navigate = useNavigate();
 
@@ -20,9 +22,14 @@ const Ou = () => {
     navigate(`/dashboard/ou/edit/${id}`);
   };
 
-  if (isLoading) {
+  if (isLoading || isBLDataLoading) {
     return <Spin />;
   }
+
+  const preparedData = data.map((ou) => ({
+    ...ou,
+    blName: blData.find((bl) => bl.id === ou.business_line_id)?.name,
+  }));
 
   const columns = [
     {
@@ -42,8 +49,8 @@ const Ou = () => {
     },
     {
       title: "Business line",
-      dataIndex: "business_line_id",
-      key: "business_line_id",
+      dataIndex: "blName",
+      key: "blName",
     },
     {
       title: "Actions",
@@ -66,7 +73,7 @@ const Ou = () => {
       <Button type='primary' onClick={handleNewOu}>
         Add new organizational unit
       </Button>
-      <Table dataSource={data} columns={columns} />
+      <Table dataSource={preparedData} columns={columns} />
     </Space>
   );
 };

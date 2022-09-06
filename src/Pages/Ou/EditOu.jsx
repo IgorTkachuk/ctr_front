@@ -1,11 +1,12 @@
 import React from "react";
-import { Form, Input, Spin, TreeSelect, Button } from "antd";
+import { Form, Input, Spin, TreeSelect, Button, Select } from "antd";
 import { useNavigate, useParams } from "react-router-dom";
 import {
   useGetAllOuQuery,
   useGetOuByIdQuery,
   useUpdateOuMutation,
 } from "../../redux/ou/ouApi";
+import { useGetAllBLQuery } from "../../redux/businessLine/businessLineApi";
 import { prepareAndBuildTree } from "../../utils";
 
 const EditOu = () => {
@@ -13,6 +14,7 @@ const EditOu = () => {
   const { id } = useParams();
   const { data: parentOuData, isLoading: isParentOuDataLoading } =
     useGetAllOuQuery();
+  const { data: blData, isLoading: isBLDataLoading } = useGetAllBLQuery();
   const { data, isLoading } = useGetOuByIdQuery(id);
   const [updateOu] = useUpdateOuMutation();
 
@@ -21,7 +23,7 @@ const EditOu = () => {
     navigate("/dashboard/ou");
   };
 
-  if (isLoading || isParentOuDataLoading) {
+  if (isLoading || isParentOuDataLoading || isBLDataLoading) {
     return <Spin />;
   }
 
@@ -67,8 +69,20 @@ const EditOu = () => {
         label='Business line'
         name='business_line_id'
         initialValue={data.business_line_id}
+        rules={[
+          {
+            required: true,
+            message: "Input busines line value",
+          },
+        ]}
       >
-        <div>Business line Select element</div>
+        <Select defaultValue={data.business_line_id}>
+          {blData.map((bl) => (
+            <Select.Option value={bl.id} key={bl.id}>
+              {bl.name}
+            </Select.Option>
+          ))}
+        </Select>
       </Form.Item>
       <Form.Item wrapperCol={{ span: 24 }}>
         <Button type='primary' htmlType='submit'>
