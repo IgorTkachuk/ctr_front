@@ -1,14 +1,23 @@
 import React from "react";
 import { Spin, Table, Space, Button } from "antd";
-import { useGetAllOuQuery } from "../../redux/ou/ouApi";
+import { useDeleteOuMutation, useGetAllOuQuery } from "../../redux/ou/ouApi";
 import { useNavigate } from "react-router-dom";
 
 const Ou = () => {
   const { data, isLoading } = useGetAllOuQuery();
+  const [deleteOu] = useDeleteOuMutation();
   const navigate = useNavigate();
 
   const handleNewOu = () => {
     navigate("/dashboard/ou/new");
+  };
+
+  const handleDelete = (id) => {
+    deleteOu(id);
+  };
+
+  const handleEdit = (id) => {
+    navigate(`/dashboard/ou/edit/${id}`);
   };
 
   if (isLoading) {
@@ -39,10 +48,12 @@ const Ou = () => {
     {
       title: "Actions",
       key: "actions",
-      render: () => (
+      render: (_, record) => (
         <Space>
-          <Button type="primary">Edit</Button>
-          <Button type="primary" danger>
+          <Button type='primary' onClick={() => handleEdit(record.id)}>
+            Edit
+          </Button>
+          <Button type='primary' danger onClick={() => handleDelete(record.id)}>
             Delete
           </Button>
         </Space>
@@ -51,8 +62,8 @@ const Ou = () => {
   ];
 
   return (
-    <Space direction="vertical" size="middle" style={{ display: "flex" }}>
-      <Button type="primary" onClick={handleNewOu}>
+    <Space direction='vertical' size='middle' style={{ display: "flex" }}>
+      <Button type='primary' onClick={handleNewOu}>
         Add new organizational unit
       </Button>
       <Table dataSource={data} columns={columns} />

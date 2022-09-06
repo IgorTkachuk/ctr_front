@@ -13,37 +13,39 @@ import NewCtrModel from "./Pages/CtrModel/NewCtrModel";
 import EditCtrModel from "./Pages/CtrModel/EditCtrModel";
 import Ou from "./Pages/Ou/Ou";
 import NewOu from "./Pages/Ou/NewOu";
+import EditOu from "./Pages/Ou/EditOu";
 
 function App() {
   return (
-    <div className="App">
+    <div className='App'>
       <BrowserRouter>
         <Routes>
-          <Route path="/login" element={<Auth />}></Route>
-          <Route path="/signup" element={<Signup />}></Route>
+          <Route path='/login' element={<Auth />}></Route>
+          <Route path='/signup' element={<Signup />}></Route>
           <Route
-            path="/dashboard"
+            path='/dashboard'
             element={
               <RequireAuth>
                 <Dashboard />
               </RequireAuth>
             }
           >
-            <Route path="vendor" element={<Vendor />} />
-            <Route path="vendor/new" element={<NewVendor />} />
-            <Route path="vendor/edit/:id" element={<EditVendor />} />
-            <Route path="printer" element={<PrnModel />} />
-            <Route path="printer/new" element={<NewPrnModel />} />
-            <Route path="printer/edit/:id" element={<EditPrnModel />} />
-            <Route path="ctrmodel" element={<CtrModel />} />
-            <Route path="ctrmodel/new" element={<NewCtrModel />} />
-            <Route path="ctrmodel/edit/:id" element={<EditCtrModel />} />
-            <Route path="ou" element={<Ou />} />
-            <Route path="ou/new" element={<NewOu />} />
-            <Route path="emploee" element={<h1>Emploee</h1>} />
-            <Route path="other" element={<h1>Other</h1>} />
+            <Route path='vendor' element={<Vendor />} />
+            <Route path='vendor/new' element={<NewVendor />} />
+            <Route path='vendor/edit/:id' element={<EditVendor />} />
+            <Route path='printer' element={<PrnModel />} />
+            <Route path='printer/new' element={<NewPrnModel />} />
+            <Route path='printer/edit/:id' element={<EditPrnModel />} />
+            <Route path='ctrmodel' element={<CtrModel />} />
+            <Route path='ctrmodel/new' element={<NewCtrModel />} />
+            <Route path='ctrmodel/edit/:id' element={<EditCtrModel />} />
+            <Route path='ou' element={<Ou />} />
+            <Route path='ou/new' element={<NewOu />} />
+            <Route path='ou/edit/:id' element={<EditOu />} />
+            <Route path='emploee' element={<h1>Emploee</h1>} />
+            <Route path='other' element={<h1>Other</h1>} />
           </Route>
-          <Route path="*" element={<Navigate to="/login" replace />} />
+          <Route path='*' element={<Navigate to='/login' replace />} />
         </Routes>
       </BrowserRouter>
     </div>

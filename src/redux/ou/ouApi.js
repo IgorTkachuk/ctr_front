@@ -19,7 +19,7 @@ export const ouApi = createApi({
             ]
           : [{ type: "Ou", id: "LIST" }],
     }),
-    getById: build.query({
+    getOuById: build.query({
       query: (id) => ({
         url: `/api/ous/${id}`,
         method: "GET",
@@ -60,7 +60,7 @@ export const ouApi = createApi({
 
 export const {
   useGetAllOuQuery,
-  useGetByIdQuery,
+  useGetOuByIdQuery,
   useCreateOuMutation,
   useUpdateOuMutation,
   useDeleteOuMutation,
