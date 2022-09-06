@@ -11,6 +11,8 @@ import EditPrnModel from "./Pages/PrnModel/EditPrnModel";
 import CtrModel from "./Pages/CtrModel/CtrModel";
 import NewCtrModel from "./Pages/CtrModel/NewCtrModel";
 import EditCtrModel from "./Pages/CtrModel/EditCtrModel";
+import Ou from "./Pages/Ou/Ou";
+import NewOu from "./Pages/Ou/NewOu";
 
 function App() {
   return (
@@ -36,6 +38,8 @@ function App() {
             <Route path="ctrmodel" element={<CtrModel />} />
             <Route path="ctrmodel/new" element={<NewCtrModel />} />
             <Route path="ctrmodel/edit/:id" element={<EditCtrModel />} />
+            <Route path="ou" element={<Ou />} />
+            <Route path="ou/new" element={<NewOu />} />
             <Route path="emploee" element={<h1>Emploee</h1>} />
             <Route path="other" element={<h1>Other</h1>} />
           </Route>

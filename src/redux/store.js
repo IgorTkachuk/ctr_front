@@ -4,6 +4,7 @@ import signup from "./signup/slice";
 import { vendorApi } from "./vendor/vendorApi";
 import { prnApi } from "./printerModel/printerModelApi";
 import { cartridgeModelApi } from "./cartridgeModel/cartridgeModelApi";
+import { ouApi } from "./ou/ouApi";
 
 import {
   persistReducer,
@@ -29,6 +30,7 @@ const rootReducer = combineReducers({
   [vendorApi.reducerPath]: vendorApi.reducer,
   [prnApi.reducerPath]: prnApi.reducer,
   [cartridgeModelApi.reducerPath]: cartridgeModelApi.reducer,
+  [ouApi.reducerPath]: ouApi.reducer,
 });
 
 const persistedReducer = persistReducer(persistConfig, rootReducer);
@@ -43,7 +45,8 @@ const store = configureStore({
     }).concat(
       vendorApi.middleware,
       prnApi.middleware,
-      cartridgeModelApi.middleware
+      cartridgeModelApi.middleware,
+      ouApi.middleware
     ),
 });
 
