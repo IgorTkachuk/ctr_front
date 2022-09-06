@@ -34,7 +34,7 @@ function NewCtrModel() {
         rules={[
           {
             required: true,
-            message: "Pleace input catridge model name",
+            message: "Please input catridge model name",
           },
         ]}
       >

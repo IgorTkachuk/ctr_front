@@ -41,7 +41,11 @@ const Dashboard = () => {
           navigate("/dashboard/printer", { replace: true });
         }
 
-        if (params.key != 1 && params.key != 2) {
+        if (params.key == 3) {
+          navigate("/dashboard/ou", { replace: true });
+        }
+
+        if (params.key == 9) {
           navigate("/dashboard/ctrmodel", { replace: true });
         }
       },
