@@ -6,6 +6,7 @@ import { prnApi } from "./printerModel/printerModelApi";
 import { cartridgeModelApi } from "./cartridgeModel/cartridgeModelApi";
 import { ouApi } from "./ou/ouApi";
 import { businessLineApi } from "./businessLine/businessLineApi";
+import { employeeApi } from "./employee/employeeApi";
 
 import {
   persistReducer,
@@ -33,6 +34,7 @@ const rootReducer = combineReducers({
   [cartridgeModelApi.reducerPath]: cartridgeModelApi.reducer,
   [ouApi.reducerPath]: ouApi.reducer,
   [businessLineApi.reducerPath]: businessLineApi.reducer,
+  [employeeApi.reducerPath]: employeeApi.reducer,
 });
 
 const persistedReducer = persistReducer(persistConfig, rootReducer);
@@ -49,7 +51,8 @@ const store = configureStore({
       prnApi.middleware,
       cartridgeModelApi.middleware,
       ouApi.middleware,
-      businessLineApi.middleware
+      businessLineApi.middleware,
+      employeeApi.middleware
     ),
 });
 
