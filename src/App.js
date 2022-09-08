@@ -17,6 +17,9 @@ import EditOu from "./Pages/Ou/EditOu";
 import BusinessLine from "./Pages/BusinessLine/BusinessLine";
 import NewBusinessLine from "./Pages/BusinessLine/NewBusinessLine";
 import EditBusinessLine from "./Pages/BusinessLine/EditBusinessLine";
+import Employee from "./Pages/Employee/Employee";
+import NewEmployee from "./Pages/Employee/NewEmployee";
+import EditEmployee from "./Pages/Employee/EditEmployee";
 
 function App() {
   return (
@@ -48,7 +51,9 @@ function App() {
             <Route path='bl' element={<BusinessLine />} />
             <Route path='bl/new' element={<NewBusinessLine />} />
             <Route path='bl/edit/:id' element={<EditBusinessLine />} />
-            <Route path='emploee' element={<h1>Emploee</h1>} />
+            <Route path='employee' element={<Employee />} />
+            <Route path='employee/new' element={<NewEmployee />} />
+            <Route path='employee/edit/:id' element={<EditEmployee />} />
             <Route path='other' element={<h1>Other</h1>} />
           </Route>
           <Route path='*' element={<Navigate to='/login' replace />} />

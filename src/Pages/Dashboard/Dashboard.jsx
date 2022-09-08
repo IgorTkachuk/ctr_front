@@ -49,6 +49,10 @@ const Dashboard = () => {
           navigate("/dashboard/bl", { replace: true });
         }
 
+        if (params.key == 5) {
+          navigate("/dashboard/employee", { replace: true });
+        }
+
         if (params.key == 9) {
           navigate("/dashboard/ctrmodel", { replace: true });
         }
