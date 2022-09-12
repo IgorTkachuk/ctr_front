@@ -53,6 +53,10 @@ const Dashboard = () => {
           navigate("/dashboard/employee", { replace: true });
         }
 
+        if (params.key == 6) {
+          navigate("/dashboard/doctype", { replace: true });
+        }
+
         if (params.key == 9) {
           navigate("/dashboard/ctrmodel", { replace: true });
         }
@@ -61,15 +65,15 @@ const Dashboard = () => {
   };
 
   const items = [
-    getItem("Option 1", "1", <PieChartOutlined />),
-    getItem("Option 2", "2", <DesktopOutlined />),
+    getItem("Vendors", "1", <PieChartOutlined />),
+    getItem("Printers", "2", <DesktopOutlined />),
     getItem("User", "sub1", <UserOutlined />, [
-      getItem("Tom", "3"),
-      getItem("Bill", "4"),
-      getItem("Alex", "5"),
+      getItem("Ous", "3"),
+      getItem("Bis line", "4"),
+      getItem("Employee", "5"),
     ]),
     getItem("Team", "sub2", <TeamOutlined />, [
-      getItem("Team 1", "6"),
+      getItem("Doc types", "6"),
       getItem("Team 2", "8"),
     ]),
     getItem("Files", "9", <FileOutlined />),
