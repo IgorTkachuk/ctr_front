@@ -20,6 +20,9 @@ import EditBusinessLine from "./Pages/BusinessLine/EditBusinessLine";
 import Employee from "./Pages/Employee/Employee";
 import NewEmployee from "./Pages/Employee/NewEmployee";
 import EditEmployee from "./Pages/Employee/EditEmployee";
+import DocType from "./Pages/DocType/DocType";
+import NewDocType from "./Pages/DocType/NewDocType";
+import EditDocType from "./Pages/DocType/EditDocType";
 
 function App() {
   return (
@@ -54,7 +57,10 @@ function App() {
             <Route path='employee' element={<Employee />} />
             <Route path='employee/new' element={<NewEmployee />} />
             <Route path='employee/edit/:id' element={<EditEmployee />} />
+            <Route path='doctype' element={<DocType />} />
+            <Route path='doctype/new' element={<NewDocType />} />
             <Route path='other' element={<h1>Other</h1>} />
+            <Route path='doctype/edit/:id' element={<EditDocType />} />
           </Route>
           <Route path='*' element={<Navigate to='/login' replace />} />
         </Routes>
