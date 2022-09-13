@@ -23,46 +23,52 @@ import EditEmployee from "./Pages/Employee/EditEmployee";
 import DocType from "./Pages/DocType/DocType";
 import NewDocType from "./Pages/DocType/NewDocType";
 import EditDocType from "./Pages/DocType/EditDocType";
+import DecomCause from "./Pages/DecomCause/DecomCause";
+import NewDecomCause from "./Pages/DecomCause/NewDecomCause";
+import EditDecomCause from "./Pages/DecomCause/EditDecomCause";
 
 function App() {
   return (
-    <div className='App'>
+    <div className="App">
       <BrowserRouter>
         <Routes>
-          <Route path='/login' element={<Auth />}></Route>
-          <Route path='/signup' element={<Signup />}></Route>
+          <Route path="/login" element={<Auth />}></Route>
+          <Route path="/signup" element={<Signup />}></Route>
           <Route
-            path='/dashboard'
+            path="/dashboard"
             element={
               <RequireAuth>
                 <Dashboard />
               </RequireAuth>
             }
           >
-            <Route path='vendor' element={<Vendor />} />
-            <Route path='vendor/new' element={<NewVendor />} />
-            <Route path='vendor/edit/:id' element={<EditVendor />} />
-            <Route path='printer' element={<PrnModel />} />
-            <Route path='printer/new' element={<NewPrnModel />} />
-            <Route path='printer/edit/:id' element={<EditPrnModel />} />
-            <Route path='ctrmodel' element={<CtrModel />} />
-            <Route path='ctrmodel/new' element={<NewCtrModel />} />
-            <Route path='ctrmodel/edit/:id' element={<EditCtrModel />} />
-            <Route path='ou' element={<Ou />} />
-            <Route path='ou/new' element={<NewOu />} />
-            <Route path='ou/edit/:id' element={<EditOu />} />
-            <Route path='bl' element={<BusinessLine />} />
-            <Route path='bl/new' element={<NewBusinessLine />} />
-            <Route path='bl/edit/:id' element={<EditBusinessLine />} />
-            <Route path='employee' element={<Employee />} />
-            <Route path='employee/new' element={<NewEmployee />} />
-            <Route path='employee/edit/:id' element={<EditEmployee />} />
-            <Route path='doctype' element={<DocType />} />
-            <Route path='doctype/new' element={<NewDocType />} />
-            <Route path='other' element={<h1>Other</h1>} />
-            <Route path='doctype/edit/:id' element={<EditDocType />} />
+            <Route path="vendor" element={<Vendor />} />
+            <Route path="vendor/new" element={<NewVendor />} />
+            <Route path="vendor/edit/:id" element={<EditVendor />} />
+            <Route path="printer" element={<PrnModel />} />
+            <Route path="printer/new" element={<NewPrnModel />} />
+            <Route path="printer/edit/:id" element={<EditPrnModel />} />
+            <Route path="ctrmodel" element={<CtrModel />} />
+            <Route path="ctrmodel/new" element={<NewCtrModel />} />
+            <Route path="ctrmodel/edit/:id" element={<EditCtrModel />} />
+            <Route path="ou" element={<Ou />} />
+            <Route path="ou/new" element={<NewOu />} />
+            <Route path="ou/edit/:id" element={<EditOu />} />
+            <Route path="bl" element={<BusinessLine />} />
+            <Route path="bl/new" element={<NewBusinessLine />} />
+            <Route path="bl/edit/:id" element={<EditBusinessLine />} />
+            <Route path="employee" element={<Employee />} />
+            <Route path="employee/new" element={<NewEmployee />} />
+            <Route path="employee/edit/:id" element={<EditEmployee />} />
+            <Route path="doctype" element={<DocType />} />
+            <Route path="doctype/new" element={<NewDocType />} />
+            <Route path="other" element={<h1>Other</h1>} />
+            <Route path="doctype/edit/:id" element={<EditDocType />} />
+            <Route path="decomcause" element={<DecomCause />} />
+            <Route path="decomcause/new" element={<NewDecomCause />} />
+            <Route path="decomcause/edit/:id" element={<EditDecomCause />} />
           </Route>
-          <Route path='*' element={<Navigate to='/login' replace />} />
+          <Route path="*" element={<Navigate to="/login" replace />} />
         </Routes>
       </BrowserRouter>
     </div>
