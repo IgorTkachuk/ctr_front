@@ -57,6 +57,10 @@ const Dashboard = () => {
           navigate("/dashboard/doctype", { replace: true });
         }
 
+        if (params.key == 8) {
+          navigate("/dashboard/decomcause", { replace: true });
+        }
+
         if (params.key == 9) {
           navigate("/dashboard/ctrmodel", { replace: true });
         }
@@ -74,7 +78,7 @@ const Dashboard = () => {
     ]),
     getItem("Team", "sub2", <TeamOutlined />, [
       getItem("Doc types", "6"),
-      getItem("Team 2", "8"),
+      getItem("Decom cause", "8"),
     ]),
     getItem("Files", "9", <FileOutlined />),
   ];
@@ -92,17 +96,17 @@ const Dashboard = () => {
         collapsed={collapsed}
         onCollapse={(value) => setCollapsed(value)}
       >
-        <div className='logo' />
+        <div className="logo" />
         <Menu
-          theme='dark'
+          theme="dark"
           defaultSelectedKeys={["1"]}
-          mode='inline'
+          mode="inline"
           items={items}
         />
       </Sider>
-      <Layout className='site-layout'>
+      <Layout className="site-layout">
         <Header
-          className='site-layout-background'
+          className="site-layout-background"
           style={{
             padding: 0,
           }}
@@ -110,10 +114,10 @@ const Dashboard = () => {
           <div
             style={{ color: "white", textAlign: "right", paddingRight: "20px" }}
           >
-            <Button type='link' onClick={() => handleLogout()}>
+            <Button type="link" onClick={() => handleLogout()}>
               Logout
             </Button>
-            <Button type='primary' shape='circle' size='large'>
+            <Button type="primary" shape="circle" size="large">
               {username.toUpperCase().slice(0, 1)}
             </Button>
           </div>
@@ -132,7 +136,7 @@ const Dashboard = () => {
             <Breadcrumb.Item>Bill</Breadcrumb.Item>
           </Breadcrumb>
           <div
-            className='site-layout-background'
+            className="site-layout-background"
             style={{
               padding: 24,
               minHeight: 360,

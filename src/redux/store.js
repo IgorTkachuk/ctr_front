@@ -8,6 +8,7 @@ import { ouApi } from "./ou/ouApi";
 import { businessLineApi } from "./businessLine/businessLineApi";
 import { employeeApi } from "./employee/employeeApi";
 import { docTypeApi } from "./docType/docTypeApi";
+import { decomCauseApi } from "./decomCause/decomCauseApi";
 
 import {
   persistReducer,
@@ -37,6 +38,7 @@ const rootReducer = combineReducers({
   [businessLineApi.reducerPath]: businessLineApi.reducer,
   [employeeApi.reducerPath]: employeeApi.reducer,
   [docTypeApi.reducerPath]: docTypeApi.reducer,
+  [decomCauseApi.reducerPath]: decomCauseApi.reducer,
 });
 
 const persistedReducer = persistReducer(persistConfig, rootReducer);
@@ -55,7 +57,8 @@ const store = configureStore({
       ouApi.middleware,
       businessLineApi.middleware,
       employeeApi.middleware,
-      docTypeApi.middleware
+      docTypeApi.middleware,
+      decomCauseApi.middleware
     ),
 });
 
