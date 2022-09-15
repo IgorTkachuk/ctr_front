@@ -1,9 +1,10 @@
 import React from "react";
-import { Form, Input, Button, Spin } from "antd";
+import { Form, Input, Button, Spin, Select } from "antd";
 import {
   useGetDocTypesByIdQuery,
   useUpdateDocTypeMutation,
 } from "../../redux/docType/docTypeApi";
+import { useGetAllCtrStatusTypeQuery } from "../../redux/ctrStatusType/ctrStatusTypeApi";
 import { useParams, useNavigate } from "react-router-dom";
 
 const EditDocType = () => {
@@ -11,31 +12,33 @@ const EditDocType = () => {
   const { id } = useParams();
   const [updateDocType] = useUpdateDocTypeMutation();
   const { data, isLoading } = useGetDocTypesByIdQuery(id);
+  const { data: ctrStatusTypeData, isLoading: isCtrStatusTypeLoading } =
+    useGetAllCtrStatusTypeQuery();
 
   const handleEdit = (values) => {
     updateDocType(values);
     navigate("/dashboard/doctype/");
   };
 
-  if (isLoading) {
+  if (isLoading || isCtrStatusTypeLoading) {
     return <Spin />;
   }
 
   return (
     <Form
       wrapperCol={{ span: 16 }}
-      labelWrap={{ span: 8 }}
+      labelCol={{ span: 8 }}
       onFinishFailed={() => {
         console.log("Failed submit add new data type due data validation");
       }}
       onFinish={handleEdit}
     >
-      <Form.Item initialValue={data.id} name='id' label='ID'>
+      <Form.Item initialValue={data.id} name="id" label="ID">
         <Input defaultValue={data.id} disabled />
       </Form.Item>
       <Form.Item
-        label='Document type name'
-        name='name'
+        label="Document type name"
+        name="name"
         initialValue={data.name}
         rules={[
           {
@@ -44,10 +47,32 @@ const EditDocType = () => {
           },
         ]}
       >
-        <Input placeholder='Doc type name' defaultValue={data.name} />
+        <Input placeholder="Doc type name" defaultValue={data.name} />
+      </Form.Item>
+      <Form.Item
+        label="Cartridge status type"
+        name="ctr_status_type_id"
+        initialValue={data.ctr_status_type_id}
+        rules={[
+          {
+            required: true,
+            message: "select cartridge status type for this doc type",
+          },
+        ]}
+      >
+        <Select
+          placeholder="Carteidge status type"
+          defaultValue={data.ctr_status_type_id}
+        >
+          {ctrStatusTypeData.map((ctrStatusType) => (
+            <Select.Option value={ctrStatusType.id}>
+              {ctrStatusType.name}
+            </Select.Option>
+          ))}
+        </Select>
       </Form.Item>
       <Form.Item wrapperCol={{ span: 24 }}>
-        <Button type='primary' htmlType='submit'>
+        <Button type="primary" htmlType="submit">
           Apply changes to this document type
         </Button>
       </Form.Item>

@@ -5,9 +5,12 @@ import {
   useGetAllDocTypesQuery,
   useDeleteDocTypesMutation,
 } from "../../redux/docType/docTypeApi";
+import { useGetAllCtrStatusTypeQuery } from "../../redux/ctrStatusType/ctrStatusTypeApi";
 
 const DocType = () => {
   const navigate = useNavigate();
+  const { data: CtrStatusTypeData, isLoading: isCtrStatusTypeLoadin } =
+    useGetAllCtrStatusTypeQuery();
   const { data, isLoading } = useGetAllDocTypesQuery();
   const [deleteDocType] = useDeleteDocTypesMutation();
 
@@ -23,9 +26,16 @@ const DocType = () => {
     navigate("/dashboard/doctype/new");
   };
 
-  if (isLoading) {
+  if (isLoading || isCtrStatusTypeLoadin) {
     return <Spin />;
   }
+
+  const preparedData = data.map((docType) => ({
+    ...docType,
+    ctr_status_name: CtrStatusTypeData.find(
+      (ctrStatusType) => ctrStatusType.id === docType.ctr_status_type_id
+    )?.name,
+  }));
 
   const columns = [
     {
@@ -34,13 +44,18 @@ const DocType = () => {
       key: "name",
     },
     {
+      title: "Cartridge status type",
+      dataIndex: "ctr_status_name",
+      key: "ctr_status_name",
+    },
+    {
       title: "Actions",
       render: (_, record) => (
-        <Space size='middle'>
-          <Button type='primary' onClick={() => handleEdit(record.id)}>
+        <Space size="middle">
+          <Button type="primary" onClick={() => handleEdit(record.id)}>
             Edit
           </Button>
-          <Button type='primary' danger onClick={() => handleDelete(record.id)}>
+          <Button type="primary" danger onClick={() => handleDelete(record.id)}>
             Delete
           </Button>
         </Space>
@@ -49,11 +64,11 @@ const DocType = () => {
   ];
 
   return (
-    <Space direction='vertical' size='middle' style={{ display: "flex" }}>
-      <Button type='primary' onClick={handleNewDocType}>
+    <Space direction="vertical" size="middle" style={{ display: "flex" }}>
+      <Button type="primary" onClick={handleNewDocType}>
         Add new doc type
       </Button>
-      <Table dataSource={data} columns={columns} />
+      <Table dataSource={preparedData} columns={columns} />
     </Space>
   );
 };

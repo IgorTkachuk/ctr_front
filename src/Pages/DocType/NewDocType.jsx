@@ -1,14 +1,16 @@
 import React from "react";
-import { Form, Input, Button, Spin, Space } from "antd";
+import { Form, Input, Button, Spin, Select } from "antd";
 import {
   useCreateDocTypeMutation,
   // useGetDocTypesByIdQuery,
 } from "../../redux/docType/docTypeApi";
-import { useParams, useNavigate } from "react-router-dom";
+import { useGetAllCtrStatusTypeQuery } from "../../redux/ctrStatusType/ctrStatusTypeApi";
+import { useNavigate } from "react-router-dom";
 
 const NewDocType = () => {
   const navigate = useNavigate();
   // const { id } = useParams();
+  const { data, isLoading } = useGetAllCtrStatusTypeQuery();
   const [createDocType] = useCreateDocTypeMutation();
   // const { data, isLoading } = useGetDocTypesByIdQuery(id);
 
@@ -18,9 +20,9 @@ const NewDocType = () => {
     navigate("/dashboard/doctype/");
   };
 
-  // if (isLoading) {
-  //   return <Spin />;
-  // }
+  if (isLoading) {
+    return <Spin />;
+  }
 
   return (
     <Form
@@ -32,8 +34,8 @@ const NewDocType = () => {
       onFinish={handleCreate}
     >
       <Form.Item
-        label='Document type name'
-        name='name'
+        label="Document type name"
+        name="name"
         rules={[
           {
             required: true,
@@ -41,10 +43,28 @@ const NewDocType = () => {
           },
         ]}
       >
-        <Input placeholder='Doc type name' />
+        <Input placeholder="Doc type name" />
+      </Form.Item>
+      <Form.Item
+        label="Cartridge status type"
+        name="ctr_status_type_id"
+        rules={[
+          {
+            required: true,
+            message: "select cartridge status type for this doc type",
+          },
+        ]}
+      >
+        <Select placeholder="Carteidge status type">
+          {data.map((ctrStatusType) => (
+            <Select.Option value={ctrStatusType.id}>
+              {ctrStatusType.name}
+            </Select.Option>
+          ))}
+        </Select>
       </Form.Item>
       <Form.Item wrapperCol={{ span: 24 }}>
-        <Button type='primary' htmlType='submit'>
+        <Button type="primary" htmlType="submit">
           Create new document type
         </Button>
       </Form.Item>
