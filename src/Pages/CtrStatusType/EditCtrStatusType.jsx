@@ -31,7 +31,7 @@ const EditCtrStatusType = () => {
       onFinish={handleFinish}
     >
       <Form.Item label="ID" name="id" initialValue={data.id}>
-        <Input defaultValue={data.id} />
+        <Input defaultValue={data.id} disabled />
       </Form.Item>
       <Form.Item
         label="Input cartridge status type name"
