@@ -26,6 +26,9 @@ import EditDocType from "./Pages/DocType/EditDocType";
 import DecomCause from "./Pages/DecomCause/DecomCause";
 import NewDecomCause from "./Pages/DecomCause/NewDecomCause";
 import EditDecomCause from "./Pages/DecomCause/EditDecomCause";
+import CtrStatusType from "./Pages/CtrStatusType/CtrStatusType";
+import NewCtrStatusType from "./Pages/CtrStatusType/NewCtrStatusType";
+import EditCtrStatusType from "./Pages/CtrStatusType/EditCtrStatusType";
 
 function App() {
   return (
@@ -67,6 +70,12 @@ function App() {
             <Route path="decomcause" element={<DecomCause />} />
             <Route path="decomcause/new" element={<NewDecomCause />} />
             <Route path="decomcause/edit/:id" element={<EditDecomCause />} />
+            <Route path="ctrstatustype" element={<CtrStatusType />} />
+            <Route path="ctrstatustype/new" element={<NewCtrStatusType />} />
+            <Route
+              path="ctrstatustype/edit/:id"
+              element={<EditCtrStatusType />}
+            />
           </Route>
           <Route path="*" element={<Navigate to="/login" replace />} />
         </Routes>
