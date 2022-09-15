@@ -57,6 +57,10 @@ const Dashboard = () => {
           navigate("/dashboard/doctype", { replace: true });
         }
 
+        if (params.key == 7) {
+          navigate("/dashboard/ctrstatustype", { replace: true });
+        }
+
         if (params.key == 8) {
           navigate("/dashboard/decomcause", { replace: true });
         }
@@ -78,6 +82,7 @@ const Dashboard = () => {
     ]),
     getItem("Team", "sub2", <TeamOutlined />, [
       getItem("Doc types", "6"),
+      getItem("Ctr status types", "7"),
       getItem("Decom cause", "8"),
     ]),
     getItem("Files", "9", <FileOutlined />),
