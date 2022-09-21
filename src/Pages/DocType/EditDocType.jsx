@@ -33,12 +33,12 @@ const EditDocType = () => {
       }}
       onFinish={handleEdit}
     >
-      <Form.Item initialValue={data.id} name="id" label="ID">
+      <Form.Item initialValue={data.id} name='id' label='ID'>
         <Input defaultValue={data.id} disabled />
       </Form.Item>
       <Form.Item
-        label="Document type name"
-        name="name"
+        label='Document type name'
+        name='name'
         initialValue={data.name}
         rules={[
           {
@@ -47,22 +47,44 @@ const EditDocType = () => {
           },
         ]}
       >
-        <Input placeholder="Doc type name" defaultValue={data.name} />
+        <Input placeholder='Doc type name' defaultValue={data.name} />
       </Form.Item>
       <Form.Item
-        label="Cartridge status type"
-        name="ctr_status_type_id"
-        initialValue={data.ctr_status_type_id}
+        label='Cartridge status type FROM'
+        name='ctr_status_type_from'
+        initialValue={data.ctr_status_type_from}
         rules={[
           {
             required: true,
-            message: "select cartridge status type for this doc type",
+            message: "select cartridge status type FROM for this doc type",
           },
         ]}
       >
         <Select
-          placeholder="Carteidge status type"
-          defaultValue={data.ctr_status_type_id}
+          placeholder='Carteidge status type FROM'
+          defaultValue={data.ctr_status_type_from}
+        >
+          {ctrStatusTypeData.map((ctrStatusType) => (
+            <Select.Option value={ctrStatusType.id}>
+              {ctrStatusType.name}
+            </Select.Option>
+          ))}
+        </Select>
+      </Form.Item>
+      <Form.Item
+        label='Cartridge status type TO'
+        name='ctr_status_type_to'
+        initialValue={data.ctr_status_type_to}
+        rules={[
+          {
+            required: true,
+            message: "select cartridge status type TO for this doc type",
+          },
+        ]}
+      >
+        <Select
+          placeholder='Carteidge status type TO'
+          defaultValue={data.ctr_status_type_to}
         >
           {ctrStatusTypeData.map((ctrStatusType) => (
             <Select.Option value={ctrStatusType.id}>
@@ -72,7 +94,7 @@ const EditDocType = () => {
         </Select>
       </Form.Item>
       <Form.Item wrapperCol={{ span: 24 }}>
-        <Button type="primary" htmlType="submit">
+        <Button type='primary' htmlType='submit'>
           Apply changes to this document type
         </Button>
       </Form.Item>

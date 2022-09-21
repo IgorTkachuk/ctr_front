@@ -1,18 +1,13 @@
 import React from "react";
 import { Form, Input, Button, Spin, Select } from "antd";
-import {
-  useCreateDocTypeMutation,
-  // useGetDocTypesByIdQuery,
-} from "../../redux/docType/docTypeApi";
+import { useCreateDocTypeMutation } from "../../redux/docType/docTypeApi";
 import { useGetAllCtrStatusTypeQuery } from "../../redux/ctrStatusType/ctrStatusTypeApi";
 import { useNavigate } from "react-router-dom";
 
 const NewDocType = () => {
   const navigate = useNavigate();
-  // const { id } = useParams();
   const { data, isLoading } = useGetAllCtrStatusTypeQuery();
   const [createDocType] = useCreateDocTypeMutation();
-  // const { data, isLoading } = useGetDocTypesByIdQuery(id);
 
   const handleCreate = (values) => {
     console.log(values);
@@ -34,8 +29,8 @@ const NewDocType = () => {
       onFinish={handleCreate}
     >
       <Form.Item
-        label="Document type name"
-        name="name"
+        label='Document type name'
+        name='name'
         rules={[
           {
             required: true,
@@ -43,19 +38,37 @@ const NewDocType = () => {
           },
         ]}
       >
-        <Input placeholder="Doc type name" />
+        <Input placeholder='Doc type name' />
       </Form.Item>
       <Form.Item
-        label="Cartridge status type"
-        name="ctr_status_type_id"
+        label='Cartridge status type from'
+        name='ctr_status_type_from'
         rules={[
           {
             required: true,
-            message: "select cartridge status type for this doc type",
+            message: "select cartridge status type FROM for this doc type",
           },
         ]}
       >
-        <Select placeholder="Carteidge status type">
+        <Select placeholder='Carteidge status type from'>
+          {data.map((ctrStatusType) => (
+            <Select.Option value={ctrStatusType.id}>
+              {ctrStatusType.name}
+            </Select.Option>
+          ))}
+        </Select>
+      </Form.Item>
+      <Form.Item
+        label='Cartridge status type to'
+        name='ctr_status_type_to'
+        rules={[
+          {
+            required: true,
+            message: "select cartridge status type TO for this doc type",
+          },
+        ]}
+      >
+        <Select placeholder='Carteidge status type to'>
           {data.map((ctrStatusType) => (
             <Select.Option value={ctrStatusType.id}>
               {ctrStatusType.name}
@@ -64,7 +77,7 @@ const NewDocType = () => {
         </Select>
       </Form.Item>
       <Form.Item wrapperCol={{ span: 24 }}>
-        <Button type="primary" htmlType="submit">
+        <Button type='primary' htmlType='submit'>
           Create new document type
         </Button>
       </Form.Item>

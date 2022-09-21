@@ -32,8 +32,11 @@ const DocType = () => {
 
   const preparedData = data.map((docType) => ({
     ...docType,
-    ctr_status_name: CtrStatusTypeData.find(
-      (ctrStatusType) => ctrStatusType.id === docType.ctr_status_type_id
+    ctr_status_from: CtrStatusTypeData.find(
+      (ctrStatusType) => ctrStatusType.id === docType.ctr_status_type_from
+    )?.name,
+    ctr_status_to: CtrStatusTypeData.find(
+      (ctrStatusType) => ctrStatusType.id === docType.ctr_status_type_to
     )?.name,
   }));
 
@@ -44,18 +47,23 @@ const DocType = () => {
       key: "name",
     },
     {
-      title: "Cartridge status type",
-      dataIndex: "ctr_status_name",
-      key: "ctr_status_name",
+      title: "Cartridge status from",
+      dataIndex: "ctr_status_from",
+      key: "ctr_status_from",
+    },
+    {
+      title: "Cartridge status to",
+      dataIndex: "ctr_status_to",
+      key: "ctr_status_to",
     },
     {
       title: "Actions",
       render: (_, record) => (
-        <Space size="middle">
-          <Button type="primary" onClick={() => handleEdit(record.id)}>
+        <Space size='middle'>
+          <Button type='primary' onClick={() => handleEdit(record.id)}>
             Edit
           </Button>
-          <Button type="primary" danger onClick={() => handleDelete(record.id)}>
+          <Button type='primary' danger onClick={() => handleDelete(record.id)}>
             Delete
           </Button>
         </Space>
@@ -64,8 +72,8 @@ const DocType = () => {
   ];
 
   return (
-    <Space direction="vertical" size="middle" style={{ display: "flex" }}>
-      <Button type="primary" onClick={handleNewDocType}>
+    <Space direction='vertical' size='middle' style={{ display: "flex" }}>
+      <Button type='primary' onClick={handleNewDocType}>
         Add new doc type
       </Button>
       <Table dataSource={preparedData} columns={columns} />
