@@ -68,6 +68,10 @@ const Dashboard = () => {
         if (params.key == 9) {
           navigate("/dashboard/ctrmodel", { replace: true });
         }
+
+        if (params.key == 10) {
+          navigate("/dashboard/doc", { replace: true });
+        }
       },
     };
   };
@@ -85,7 +89,8 @@ const Dashboard = () => {
       getItem("Ctr status types", "7"),
       getItem("Decom cause", "8"),
     ]),
-    getItem("Files", "9", <FileOutlined />),
+    getItem("Ctr models", "9", <FileOutlined />),
+    getItem("Docs", "10"),
   ];
 
   const [collapsed, setCollapsed] = useState(false);
