@@ -10,6 +10,8 @@ import { employeeApi } from "./employee/employeeApi";
 import { docTypeApi } from "./docType/docTypeApi";
 import { decomCauseApi } from "./decomCause/decomCauseApi";
 import { ctrStatusTypeApi } from "./ctrStatusType/ctrStatusTypeApi";
+import { docApi } from "./doc/docApi";
+import { usrApi } from "./usr/usrApi";
 
 import {
   persistReducer,
@@ -41,6 +43,8 @@ const rootReducer = combineReducers({
   [docTypeApi.reducerPath]: docTypeApi.reducer,
   [decomCauseApi.reducerPath]: decomCauseApi.reducer,
   [ctrStatusTypeApi.reducerPath]: ctrStatusTypeApi.reducer,
+  [docApi.reducerPath]: docApi.reducer,
+  [usrApi.reducerPath]: usrApi.reducer,
 });
 
 const persistedReducer = persistReducer(persistConfig, rootReducer);
@@ -61,7 +65,9 @@ const store = configureStore({
       employeeApi.middleware,
       docTypeApi.middleware,
       decomCauseApi.middleware,
-      ctrStatusTypeApi.middleware
+      ctrStatusTypeApi.middleware,
+      docApi.middleware,
+      usrApi.middleware
     ),
 });
 
