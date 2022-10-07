@@ -47,11 +47,11 @@ const NewDoc = () => {
           console.log("Failed due formsubmit");
         }}
         onFinish={handleSubmit}
-        size="small"
+        size='small'
       >
         <Form.Item
-          label="Document type:"
-          name="doc_type_id"
+          label='Document type:'
+          name='doc_type_id'
           rules={[
             {
               required: true,
@@ -62,7 +62,7 @@ const NewDoc = () => {
         >
           <Select
             onChange={handleChangeDocType}
-            placeholder="select document type"
+            placeholder='select document type'
           >
             {docTypeData.map((docType) => (
               <Select.Option key={docType.id} value={docType.id}>
@@ -71,10 +71,10 @@ const NewDoc = () => {
             ))}
           </Select>
         </Form.Item>
-        {docType === 1 && (
+        {docType > 0 && (
           <Form.Item
-            label="Date:"
-            name="doc_date"
+            label='Date:'
+            name='doc_date'
             rules={[
               {
                 required: true,
@@ -84,7 +84,7 @@ const NewDoc = () => {
           >
             <DatePicker
               locale={locale}
-              format="DD.MM.YYYY"
+              format='DD.MM.YYYY'
               style={{ display: "table" }}
             />
           </Form.Item>
@@ -93,7 +93,7 @@ const NewDoc = () => {
           <CtrNewRow ctrModels={ctrModels} />
         </Form.Item>
         <Form.Item wrapperCol={{ span: 24 }}>
-          <Button type="primary" htmlType="submit">
+          <Button type='primary' htmlType='submit'>
             Create new document
           </Button>
         </Form.Item>

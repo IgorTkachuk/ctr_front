@@ -6,8 +6,21 @@ const docUrl = "/api/doc";
 export const docApi = createApi({
   reducerPath: "docApi",
   baseQuery: appBaseQuery(),
-  tagTypes: ["Doc"],
+  tagTypes: ["Doc", "CtrShowcase"],
   endpoints: (build) => ({
+    getCtrShowcase: build.query({
+      query: () => ({
+        url: "/api/ctrshowcase",
+        method: "GET",
+      }),
+      providesTags: (result) =>
+        result
+          ? [
+              ...result.map((item) => ({ type: "CtrShowcase", id: item.id })),
+              { type: "CtrShowcase", id: "LIST" },
+            ]
+          : [{ type: "CtrShowcase", id: "LIST" }],
+    }),
     getAllDoc: build.query({
       query: () => ({
         url: docUrl,
@@ -40,7 +53,7 @@ export const docApi = createApi({
         method: "POST",
         body,
       }),
-      invalidatesTags: ["Doc"],
+      invalidatesTags: ["Doc", "CtrShowcase"],
     }),
     updateDoc: build.mutation({
       query: (body) => ({
@@ -48,14 +61,14 @@ export const docApi = createApi({
         method: "PATCH",
         body,
       }),
-      invalidatesTags: ["Doc"],
+      invalidatesTags: ["Doc", "CtrShowcase"],
     }),
     deleteDoc: build.mutation({
       query: (id) => ({
         url: `${docUrl}/${id}`,
         method: "DELETE",
       }),
-      invalidatesTags: ["Doc"],
+      invalidatesTags: ["Doc", "CtrShowcase"],
     }),
   }),
 });
@@ -66,4 +79,5 @@ export const {
   useCreateDocMutation,
   useUpdateDocMutation,
   useDeleteDocMutation,
+  useGetCtrShowcaseQuery,
 } = docApi;

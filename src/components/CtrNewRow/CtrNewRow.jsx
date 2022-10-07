@@ -3,7 +3,7 @@ import { MinusCircleOutlined, PlusOutlined } from "@ant-design/icons";
 
 const CtrNewRow = ({ ctrModels, ...otherProp }) => {
   return (
-    <Form.List name="ctr" {...otherProp}>
+    <Form.List name='ctrs' {...otherProp}>
       {(fields, { add, remove }) => (
         <>
           {fields.map(({ key, name, ...restField }) => (
@@ -14,11 +14,11 @@ const CtrNewRow = ({ ctrModels, ...otherProp }) => {
                 display: "flex",
                 marginBottom: 0,
               }}
-              align="baseline"
+              align='baseline'
             >
               <Form.Item
                 {...restField}
-                name={[name, "model"]}
+                name={[name, "model_id"]}
                 rules={[
                   {
                     required: true,
@@ -27,7 +27,7 @@ const CtrNewRow = ({ ctrModels, ...otherProp }) => {
                 ]}
               >
                 <Select
-                  placeholder="select cartridge model ..."
+                  placeholder='select cartridge model ...'
                   style={{ minWidth: 400, textAlign: "left" }}
                 >
                   {ctrModels.map((model) => (
@@ -39,7 +39,7 @@ const CtrNewRow = ({ ctrModels, ...otherProp }) => {
               </Form.Item>
               <Form.Item
                 {...restField}
-                name={[name, "sn"]}
+                name={[name, "serial_number"]}
                 rules={[
                   {
                     required: true,
@@ -47,14 +47,14 @@ const CtrNewRow = ({ ctrModels, ...otherProp }) => {
                   },
                 ]}
               >
-                <Input placeholder="Serial number" />
+                <Input placeholder='Serial number' />
               </Form.Item>
               <MinusCircleOutlined onClick={() => remove(name)} />
             </Space>
           ))}
           <Form.Item>
             <Button
-              type="dashed"
+              type='dashed'
               onClick={() => add()}
               block
               icon={<PlusOutlined />}
